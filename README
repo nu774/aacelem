@@ -1,0 +1,28 @@
+=============================================================================
+aacelem - tiny tool to pull specific channel element from ADTS LC-AAC stream
+=============================================================================
+
+usage
+-----
+aacelem -a INFILE
+  Scan INFILE and show channel elements in it, such as SCE, CPE, or LFE.
+  SCE means single channel element, used for mono or center channel.
+  CPE means channel pair element, which contains stereo channels.
+  Since INFILE can contains multiple parts with different channel settings,
+  -a will scan whole input. If you are sure that input doesn't contain
+  such parts or you just want to see first elemets, just type CTRL-C and
+  kill aacelem.
+
+aacelem INFILE N1:OUTFILE1 [N2:OUTFILE2..]  
+  N1,N2.. are positions of channel element to select (starting with 1).
+  Each specified channel element is written into OUTFILE
+  in the form of ADTS stream.
+
+example
+-------
+aacelem 5.1ch.aac 1:C.aac 2:LR.aac
+  This command line will output first channel element(SCE) into C.aac
+  and second chanel element(CPE) into LR.aac.
+
+aacelem dual-mono.aac 1:out.aac
+  This will output first mono channel in dual-mono source into out.aac.
