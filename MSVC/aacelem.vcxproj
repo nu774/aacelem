@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3990628C-6C2D-4F58-AB23-F15B7D3BC300}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>aacsel</RootNamespace>
+    <RootNamespace>aacelem</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
