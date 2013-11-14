@@ -10,7 +10,7 @@ aacelem -a INFILE
   CPE means channel pair element, which contains stereo channels.
   Since INFILE can contains multiple parts with different channel settings,
   -a will scan whole input. If you are sure that input doesn't contain
-  such parts or you just want to see first elemets, just type CTRL-C and
+  such parts or you just want to see first elements, just type CTRL-C and
   kill aacelem.
 
 aacelem INFILE N1:OUTFILE1 [N2:OUTFILE2..]  
