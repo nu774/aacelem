@@ -15,7 +15,7 @@ aacelem_SOURCES = \
     faad2/libfaad/specrec.c  \
     faad2/libfaad/syntax.c
 
-AM_CPPFLAGS = -Ifaad2/include -Ifaad2/libfaad -DLC_ONLY_DECODER 
+AM_CPPFLAGS = -I$(top_srcdir)/faad2/include -I$(top_srcdir)/faad2/libfaad -DLC_ONLY_DECODER 
 
 if XX_PLATFORM_POSIX
     aacelem_SOURCES += src/compat_posix.c
@@ -27,5 +27,5 @@ endif
 
 if XX_NO_GETOPT
     aacelem_SOURCES += getopt/getopt.c
-    AM_CPPFLAGS += -Igetopt
+    AM_CPPFLAGS += -I$(top_srcdir)/getopt
 endif
