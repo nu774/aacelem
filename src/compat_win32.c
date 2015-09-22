@@ -19,14 +19,7 @@
 #include "compat.h"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
-typedef struct
-{
-    int newmode;
-} _startupinfo;
-
-extern
-int __wgetmainargs(int *, wchar_t ***, wchar_t ***, int, _startupinfo *);
+#include <shellapi.h>
 
 static
 int codepage_decode_wchar(int codepage, const char *from, wchar_t **to)
@@ -84,19 +77,14 @@ void aacenc_free_mainargs(void)
 
 void aacenc_getmainargs(int *argc, char ***argv)
 {
-    static int (*fp__wgetmainargs)(int *, wchar_t ***, wchar_t ***,
-                                   int, _startupinfo *);
     int i;
-    wchar_t **wargv, **envp;
-    _startupinfo si = { 0 };
-    HMODULE h = LoadLibraryA("msvcrt.dll");
-    fp__wgetmainargs = (void *)GetProcAddress(h, "__wgetmainargs");
-    (*fp__wgetmainargs)(argc, &wargv, &envp, 1, &si);
-    FreeLibrary(h);
+    wchar_t **wargv;
 
+    wargv = CommandLineToArgvW(GetCommandLineW(), argc);
     *argv = malloc((*argc + 1) * sizeof(char*));
     for (i = 0; i < *argc; ++i)
         codepage_encode_wchar(CP_UTF8, wargv[i], &(*argv)[i]);
+        LocalFree(wargv);
     (*argv)[*argc] = 0;
     __aacenc_argv__ = *argv;
     atexit(aacenc_free_mainargs);
